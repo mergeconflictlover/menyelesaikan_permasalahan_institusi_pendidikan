@@ -1,0 +1,22 @@
+{
+  "base_url": "http://localhost:3001",
+  "collection_id": 5,
+  "collection_name": "Jaya Jaya Institut Submission",
+  "dashboard_id": 2,
+  "dashboard_name": "Student Retention & Performance Dashboard",
+  "database_id": 2,
+  "cards": {
+    "EDU - Total Students KPI": 40,
+    "EDU - Dropout Rate KPI": 41,
+    "EDU - Graduation Rate KPI": 42,
+    "EDU - Tuition Issue Rate KPI": 43,
+    "EDU - Student Status Distribution": 44,
+    "EDU - Tuition Status by Student Outcome": 45,
+    "EDU - Dropout Rate by Gender": 46,
+    "EDU - Top Courses by Dropout Count": 47,
+    "EDU - Average Approved Units by Status": 48,
+    "EDU - Dropout Rate by Age Band": 49,
+    "EDU - Dropout Rate by Attendance": 50,
+    "EDU - Course Risk Table": 51
+  }
+}
