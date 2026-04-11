@@ -18,10 +18,10 @@ Jaya Jaya Institut merupakan institusi pendidikan tinggi yang menghadapi masalah
 
 ### Persiapan
 Sumber data:
-- Dataset utama yang digunakan dalam submission: [data.csv](/home/digitalfuck/Desktop/himbar_ds/new_subs/subsmission/data/data.csv)
+- Dataset utama yang digunakan dalam submission: `data/data.csv`
 - Sumber asli dataset dari repository Dicoding: `https://github.com/dicodingacademy/dicoding_dataset/tree/main/students_performance`
 - File dataset asli dari repository Dicoding: `https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv`
-- Dokumentasi dataset lokal hasil salinan referensi: [students_performance/README.md](/home/digitalfuck/Desktop/himbar_ds/new_subs/dicoding_dataset/students_performance/README.md)
+- Dokumentasi dataset lokal hasil salinan referensi: `students_performance/README.md`
 
 Setup environment:
 
@@ -60,7 +60,18 @@ http://localhost:8501
 ```
 
 ### Link Prototype Streamlit Community Cloud
-Prototype siap dijalankan secara lokal melalui `app.py`. Link deployment publik belum dicantumkan pada revisi ini dan dapat ditambahkan setelah aplikasi diunggah ke repository GitHub lalu di-deploy ke Streamlit Community Cloud.
+Prototype juga telah di-deploy ke Streamlit Community Cloud dan dapat diakses melalui:
+
+- `https://studentstatuspredictor.streamlit.app/`
+
+Repository GitHub untuk deployment:
+
+- `https://github.com/mergeconflictlover/menyelesaikan_permasalahan_institusi_pendidikan`
+
+Dokumentasi visual prototype yang disertakan pada folder submission:
+
+- Screenshot Streamlit lokal: `localhost:8501.png`
+- Screenshot Streamlit Community Cloud: `studentstatuspredictor.streamlit.app.png`
 
 ## Business Dashboard
 Dashboard bisnis utama untuk submission ini menggunakan `Metabase`, mengikuti pendekatan yang sama seperti submission sebelumnya. Dashboard ini difokuskan untuk membantu institusi memonitor indikator yang paling berkaitan dengan risiko dropout, seperti status pembayaran biaya kuliah, jumlah mata kuliah yang lulus pada semester pertama dan kedua, distribusi status siswa, serta perbedaan performa antar program studi.
@@ -72,7 +83,7 @@ Metrik yang paling penting untuk dimonitor adalah:
 - jumlah mata kuliah semester pertama yang disetujui;
 - distribusi risiko berdasarkan program studi dan kelompok usia.
 
-Dashboard Metabase dirancang untuk dilengkapi interaktivitas dasar berupa filter seperti `Course`, `Gender`, `Tuition Status`, dan kelompok usia agar pengguna dapat melakukan eksplorasi kelompok siswa tertentu dengan lebih cepat.
+Dashboard Metabase dirancang sebagai dashboard monitoring ringkas yang langsung menampilkan indikator utama terkait risiko dropout, performa akademik, status pembayaran biaya kuliah, kelompok usia, dan program studi yang perlu diprioritaskan untuk intervensi.
 
 Untuk menjalankan dashboard Metabase secara lokal, gunakan tahapan berikut:
 ```bash
@@ -103,6 +114,18 @@ Catatan penting:
 - sebelum melakukan zip submission, matikan container Metabase agar file database tidak sedang terkunci;
 - aplikasi `Streamlit` pada submission ini tetap dipakai sebagai prototype machine learning, sedangkan business dashboard utamanya menggunakan Metabase.
 
+Dokumentasi visual dashboard yang disertakan pada folder submission:
+
+- Screenshot dashboard Metabase: `himbarbuana-dashboard.png`
+
+Dashboard alternatif juga dibuat menggunakan Looker Studio dan dapat diakses melalui:
+
+- `https://lookerstudio.google.com/reporting/5927d08e-c3b1-4f24-a10e-fe8f5b0b7b5f`
+
+Dokumentasi visual Looker Studio yang disertakan pada folder submission:
+
+- Screenshot dashboard Looker Studio: `lookerstudio.google.com.png`
+
 ## Menjalankan Sistem Machine Learning
 Aplikasi prototype dimuat dari model terlatih pada folder `model/student_status_pipeline.joblib`. Prototype menerima input profil siswa dan performa akademik awal, lalu menampilkan:
 - prediksi status siswa;
@@ -120,6 +143,10 @@ Struktur artefak utama yang digunakan aplikasi:
 - `model_utils.py`
 - `model/student_status_pipeline.joblib`
 - `model/metrics_summary.json`
+
+Dokumentasi video submission yang disertakan pada folder submission:
+
+- Video penjelasan proyek: `himbarbuana-video.mp4`
 
 ## Conclusion
 Proyek ini menunjukkan bahwa masalah dropout di Jaya Jaya Institut paling kuat berkaitan dengan kombinasi performa akademik awal dan kedisiplinan administrasi siswa.

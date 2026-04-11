@@ -492,7 +492,7 @@ with dashboard_tab:
         st.caption("How the current filtered population is split across final student outcomes.")
         st.altair_chart(
             compact_bar_chart(status_counts, "Student status:N", "Students:Q", color="#2563EB", height=320),
-            use_container_width=True,
+            width="stretch",
         )
 
     row_one = st.columns(3)
@@ -501,7 +501,7 @@ with dashboard_tab:
         st.caption("This view highlights how tuition discipline is associated with student outcomes.")
         st.altair_chart(
             stacked_bar_chart(fee_chart, "Tuition status", ["#2563EB", "#60A5FA", "#BFDBFE"], height=240),
-            use_container_width=True,
+            width="stretch",
         )
 
     with row_one[1].container(border=True, height="stretch"):
@@ -509,7 +509,7 @@ with dashboard_tab:
         st.caption("Programs with the highest number of dropout cases in the current view.")
         st.altair_chart(
             horizontal_bar_chart(at_risk_course, "Dropout cases:Q", "Course_name:N", color="#3B82F6"),
-            use_container_width=True,
+            width="stretch",
         )
 
     with row_one[2].container(border=True, height="stretch"):
@@ -517,7 +517,7 @@ with dashboard_tab:
         st.caption("Older entry cohorts can show a different risk profile than younger cohorts.")
         st.altair_chart(
             compact_bar_chart(age_dropout, "Age_band:N", "Dropout rate:Q", color="#60A5FA"),
-            use_container_width=True,
+            width="stretch",
         )
 
     row_two = st.columns(2)
@@ -531,7 +531,7 @@ with dashboard_tab:
                 ["#2563EB", "#93C5FD"],
                 height=240,
             ),
-            use_container_width=True,
+            width="stretch",
         )
 
     with row_two[1].container(border=True, height="stretch"):
@@ -565,7 +565,7 @@ with dashboard_tab:
                     "dropout_rate": "Dropout rate",
                 }
             ),
-            use_container_width=True,
+            width="stretch",
         )
 
     with st.container(border=True):
@@ -581,7 +581,7 @@ with dashboard_tab:
             "Curricular_units_1st_sem_approved",
             "Curricular_units_2nd_sem_approved",
         ]
-        st.dataframe(filtered_data[preview_cols].head(15), use_container_width=True, hide_index=True)
+        st.dataframe(filtered_data[preview_cols].head(15), width="stretch", hide_index=True)
 
 with prediction_tab:
     intro_cols = st.columns([1.35, 1])
@@ -715,7 +715,7 @@ with prediction_tab:
                 step=0.01,
             )
 
-        submitted = st.form_submit_button("Predict student status", use_container_width=True)
+        submitted = st.form_submit_button("Predict student status", width="stretch")
 
     input_frame = pd.DataFrame(
         [
@@ -748,7 +748,7 @@ with prediction_tab:
     )
 
     with st.expander("Preview input data"):
-        st.dataframe(input_frame, use_container_width=True)
+        st.dataframe(input_frame, width="stretch")
 
     if submitted:
         prediction = model.predict(input_frame)[0]
@@ -770,7 +770,7 @@ with prediction_tab:
             st.markdown("#### Probability By Class")
             st.altair_chart(
                 horizontal_bar_chart(proba_df, "Probability:Q", "Status:N", color="#2563EB", height=220),
-                use_container_width=True,
+                width="stretch",
             )
 
         with result_cols[2].container(border=True, height="stretch"):
@@ -802,9 +802,10 @@ with prediction_tab:
         sim_cols = st.columns(2)
         with sim_cols[0].container(border=True, height="stretch"):
             st.markdown("#### Simulation Table")
-            st.dataframe(scenario_df, use_container_width=True, hide_index=True)
+            st.dataframe(scenario_df, width="stretch", hide_index=True)
         with sim_cols[1].container(border=True, height="stretch"):
             st.markdown("#### Simulation Chart")
             st.bar_chart(
-                scenario_df.set_index("2nd semester approved units")[["Dropout probability"]]
+                scenario_df.set_index("2nd semester approved units")[["Dropout probability"]],
+                width="stretch",
             )
