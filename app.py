@@ -114,11 +114,6 @@ STATUS_COPY = {
         "tone": "critical",
         "summary": "This profile should be placed on the academic intervention watchlist.",
     },
-    "Enrolled": {
-        "label": "Enrolled",
-        "tone": "watch",
-        "summary": "This profile is still active, but progress should be monitored closely.",
-    },
     "Graduate": {
         "label": "Graduate",
         "tone": "positive",
@@ -141,13 +136,13 @@ def load_metrics():
 def load_data():
     df = pd.read_csv(DATA_PATH, sep=";", encoding="utf-8-sig")
     df = df.rename(columns={"Status": "Target"})
+    df = df[df["Target"].isin(["Dropout", "Graduate"])].copy()
     df["Course_name"] = df["Course"].map(COURSE_MAP)
     df["Gender_label"] = df["Gender"].map(GENDER_MAP)
     df["Tuition_label"] = df["Tuition_fees_up_to_date"].map(YES_NO_MAP)
     df["Attendance_label"] = df["Daytime_evening_attendance"].map(ATTENDANCE_MAP)
     df["Dropout_flag"] = df["Target"].eq("Dropout").astype(int)
     df["Graduate_flag"] = df["Target"].eq("Graduate").astype(int)
-    df["Enrolled_flag"] = df["Target"].eq("Enrolled").astype(int)
     return df
 
 
@@ -379,8 +374,8 @@ st.markdown(
     """
     <div class="hero">
         <div class="eyebrow">Academic Executive Dashboard</div>
-        <h1>Jaya Jaya Institut Student Status Predictor</h1>
-        <p>Monitor student risk and academic performance trends.</p>
+        <h1>Jaya Jaya Institut Dropout Predictor</h1>
+        <p>Monitor dropout risk against graduate patterns using early academic and administrative signals.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -390,7 +385,7 @@ st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 dashboard_tab, prediction_tab = st.tabs(["Monitoring Dashboard", "Prediction Prototype"])
 
 with dashboard_tab:
-    st.caption("Use the dashboard to inspect student risk patterns, academic progression, and operational warning signs.")
+    st.caption("Use the dashboard to compare dropout and graduate patterns, academic progression, and operational warning signs.")
 
     top_board = st.columns([1, 3])
     with top_board[0].container(border=True, height="stretch"):
@@ -489,7 +484,7 @@ with dashboard_tab:
 
     with top_board[1].container(border=True, height="stretch"):
         st.markdown("#### Student status distribution")
-        st.caption("How the current filtered population is split across final student outcomes.")
+        st.caption("How the current filtered population is split across final dropout-versus-graduate outcomes.")
         st.altair_chart(
             compact_bar_chart(status_counts, "Student status:N", "Students:Q", color="#2563EB", height=320),
             width="stretch",
@@ -498,7 +493,7 @@ with dashboard_tab:
     row_one = st.columns(3)
     with row_one[0].container(border=True, height="stretch"):
         st.markdown("#### Student outcome by tuition status")
-        st.caption("This view highlights how tuition discipline is associated with student outcomes.")
+        st.caption("This view highlights how tuition discipline is associated with dropout and graduation outcomes.")
         st.altair_chart(
             stacked_bar_chart(fee_chart, "Tuition status", ["#2563EB", "#60A5FA", "#BFDBFE"], height=240),
             width="stretch",
@@ -523,7 +518,7 @@ with dashboard_tab:
     row_two = st.columns(2)
     with row_two[0].container(border=True, height="stretch"):
         st.markdown("#### Approved units by student status")
-        st.caption("Comparing first-semester and second-semester approved units across status groups.")
+        st.caption("Comparing first-semester and second-semester approved units across the two final status groups.")
         st.altair_chart(
             grouped_bar_chart(
                 approval_chart,
@@ -549,7 +544,7 @@ with dashboard_tab:
             - Keep a close watch on students with low approved units in the second semester.
             - Combine academic monitoring with tuition follow-up.
             - Prioritize study programs with the highest dropout load.
-            - Review transition cases that remain in the `Enrolled` segment.
+            - Escalate cases that still resemble the dropout profile after second-semester monitoring.
             """
         )
 
@@ -588,7 +583,7 @@ with prediction_tab:
     with intro_cols[0]:
         st.markdown("#### Prediction studio")
         st.caption(
-            "Enter a student profile to estimate whether the current pattern is closer to Dropout, Enrolled, or Graduate."
+            "Enter a student profile to estimate whether the current pattern is closer to Dropout or Graduate."
         )
     with intro_cols[1]:
         st.markdown("#### Model guidance")

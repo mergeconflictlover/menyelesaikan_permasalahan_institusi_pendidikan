@@ -1,12 +1,12 @@
 {
-  "row_count": 4424,
+  "row_count": 3630,
   "column_count": 37,
+  "raw_row_count": 4424,
   "duplicate_count": 0,
   "missing_total": 0,
   "target_distribution": {
     "Graduate": 2209,
-    "Dropout": 1421,
-    "Enrolled": 794
+    "Dropout": 1421
   },
   "selected_features": [
     "Marital_status",
@@ -62,201 +62,187 @@
   ],
   "model_results": {
     "Logistic Regression": {
-      "accuracy": 0.765,
-      "precision_weighted": 0.7422,
-      "recall_weighted": 0.765,
-      "f1_weighted": 0.7436
+      "accuracy": 0.916,
+      "precision_weighted": 0.9176,
+      "recall_weighted": 0.916,
+      "f1_weighted": 0.915
     },
     "Random Forest": {
-      "accuracy": 0.7593,
-      "precision_weighted": 0.7393,
-      "recall_weighted": 0.7593,
-      "f1_weighted": 0.7385
+      "accuracy": 0.9105,
+      "precision_weighted": 0.9144,
+      "recall_weighted": 0.9105,
+      "f1_weighted": 0.9089
     },
     "Gradient Boosting": {
-      "accuracy": 0.7661,
-      "precision_weighted": 0.7517,
-      "recall_weighted": 0.7661,
-      "f1_weighted": 0.7547
+      "accuracy": 0.9132,
+      "precision_weighted": 0.9151,
+      "recall_weighted": 0.9132,
+      "f1_weighted": 0.9121
     }
   },
-  "best_model": "Gradient Boosting",
+  "best_model": "Logistic Regression",
   "best_model_metrics": {
-    "accuracy": 0.7661,
-    "precision_weighted": 0.7517,
-    "recall_weighted": 0.7661,
-    "f1_weighted": 0.7547
+    "accuracy": 0.916,
+    "precision_weighted": 0.9176,
+    "recall_weighted": 0.916,
+    "f1_weighted": 0.915
   },
   "classification_report": {
     "Dropout": {
-      "precision": 0.7954545454545454,
-      "recall": 0.7394366197183099,
-      "f1-score": 0.7664233576642335,
+      "precision": 0.9407114624505929,
+      "recall": 0.8380281690140845,
+      "f1-score": 0.8864059590316573,
       "support": 284.0
     },
-    "Enrolled": {
-      "precision": 0.5172413793103449,
-      "recall": 0.37735849056603776,
-      "f1-score": 0.43636363636363634,
-      "support": 159.0
-    },
     "Graduate": {
-      "precision": 0.807920792079208,
-      "recall": 0.9230769230769231,
-      "f1-score": 0.8616684266103485,
+      "precision": 0.9027484143763214,
+      "recall": 0.9660633484162896,
+      "f1-score": 0.9333333333333333,
       "support": 442.0
     },
-    "accuracy": 0.7661016949152543,
+    "accuracy": 0.9159779614325069,
     "macro avg": {
-      "precision": 0.7068722389480326,
-      "recall": 0.679957344453757,
-      "f1-score": 0.688151806879406,
-      "support": 885.0
+      "precision": 0.9217299384134572,
+      "recall": 0.9020457587151871,
+      "f1-score": 0.9098696461824953,
+      "support": 726.0
     },
     "weighted avg": {
-      "precision": 0.751696565331577,
-      "recall": 0.7661016949152543,
-      "f1-score": 0.754693216181056,
-      "support": 885.0
+      "precision": 0.9175989731271382,
+      "recall": 0.9159779614325069,
+      "f1-score": 0.9149760684549918,
+      "support": 726.0
     }
   },
   "confusion_matrix": [
     [
-      210,
-      33,
-      41
+      238,
+      46
     ],
     [
-      43,
-      60,
-      56
-    ],
-    [
-      11,
-      23,
-      408
+      15,
+      427
     ]
   ],
   "class_labels": [
     "Dropout",
-    "Enrolled",
     "Graduate"
   ],
   "feature_importance": [
     {
       "feature": "Curricular_units_2nd_sem_approved",
-      "importance_mean": 0.21505025823825488,
-      "importance_std": 0.011581744203594356
-    },
-    {
-      "feature": "Tuition_fees_up_to_date",
-      "importance_mean": 0.051601419725262776,
-      "importance_std": 0.004867176385496666
+      "importance_mean": 0.2316059162522361,
+      "importance_std": 0.015709748566345518
     },
     {
       "feature": "Curricular_units_1st_sem_approved",
-      "importance_mean": 0.05089897671116302,
-      "importance_std": 0.008504207974649574
-    },
-    {
-      "feature": "Course",
-      "importance_mean": 0.020376237100506955,
-      "importance_std": 0.00893925556995558
-    },
-    {
-      "feature": "Age_at_enrollment",
-      "importance_mean": 0.016750822816593503,
-      "importance_std": 0.005950224132587577
+      "importance_mean": 0.09158497505960186,
+      "importance_std": 0.0055877755630379024
     },
     {
       "feature": "Curricular_units_2nd_sem_enrolled",
-      "importance_mean": 0.014555401142129587,
-      "importance_std": 0.003978039051956671
+      "importance_mean": 0.05037872900551619,
+      "importance_std": 0.006307486188586525
+    },
+    {
+      "feature": "Tuition_fees_up_to_date",
+      "importance_mean": 0.0341901847252163,
+      "importance_std": 0.003464703025044785
     },
     {
       "feature": "Curricular_units_1st_sem_enrolled",
-      "importance_mean": 0.011185903633449212,
-      "importance_std": 0.0040186834378893015
+      "importance_mean": 0.032667723078518264,
+      "importance_std": 0.004044799196196534
+    },
+    {
+      "feature": "Age_at_enrollment",
+      "importance_mean": 0.014650279890073503,
+      "importance_std": 0.00403549027213091
+    },
+    {
+      "feature": "Course",
+      "importance_mean": 0.012643611637381846,
+      "importance_std": 0.005491059507861593
     },
     {
       "feature": "Curricular_units_2nd_sem_grade",
-      "importance_mean": 0.011083021094019907,
-      "importance_std": 0.004862529486815628
-    },
-    {
-      "feature": "Previous_qualification",
-      "importance_mean": 0.005284319381221636,
-      "importance_std": 0.0018858832627035853
-    },
-    {
-      "feature": "Gender",
-      "importance_mean": 0.005169880055414355,
-      "importance_std": 0.0029937982754460377
-    },
-    {
-      "feature": "Application_order",
-      "importance_mean": 0.005075621026376797,
-      "importance_std": 0.0053804219256134425
-    },
-    {
-      "feature": "Previous_qualification_grade",
-      "importance_mean": 0.0044644410203691035,
-      "importance_std": 0.003097601542660402
-    },
-    {
-      "feature": "Debtor",
-      "importance_mean": 0.004013676512092068,
-      "importance_std": 0.0024910302491676895
-    },
-    {
-      "feature": "Curricular_units_1st_sem_grade",
-      "importance_mean": 0.0036529265491982987,
-      "importance_std": 0.005076509969194835
-    },
-    {
-      "feature": "Displaced",
-      "importance_mean": 0.003137835663133537,
-      "importance_std": 0.0030839933066763464
-    },
-    {
-      "feature": "Inflation_rate",
-      "importance_mean": 0.0028029946763370784,
-      "importance_std": 0.0019341459652113522
+      "importance_mean": 0.007723969006387887,
+      "importance_std": 0.003977387116770033
     },
     {
       "feature": "Unemployment_rate",
-      "importance_mean": 0.0016777464542535592,
-      "importance_std": 0.004694069630267795
+      "importance_mean": 0.006564019643106223,
+      "importance_std": 0.001990911860323292
     },
     {
-      "feature": "GDP",
-      "importance_mean": 0.0008311237792719584,
-      "importance_std": 0.0024962374961365213
+      "feature": "Scholarship_holder",
+      "importance_mean": 0.00472786739195884,
+      "importance_std": 0.0026495369864023566
     },
     {
-      "feature": "Marital_status",
-      "importance_mean": 0.0003243876917570665,
-      "importance_std": 0.0006866383978744029
+      "feature": "Debtor",
+      "importance_mean": 0.004460730365088139,
+      "importance_std": 0.0021418341764478824
+    },
+    {
+      "feature": "Application_mode",
+      "importance_mean": 0.004358504729773361,
+      "importance_std": 0.0019615826548723195
+    },
+    {
+      "feature": "Gender",
+      "importance_mean": 0.002087833699713626,
+      "importance_std": 0.0028066448906295463
+    },
+    {
+      "feature": "Inflation_rate",
+      "importance_mean": 0.000685182599706613,
+      "importance_std": 0.001980933561948961
     },
     {
       "feature": "Daytime_evening_attendance",
+      "importance_mean": 0.0005194665366762274,
+      "importance_std": 0.0014363504261823792
+    },
+    {
+      "feature": "GDP",
       "importance_mean": 0.0,
       "importance_std": 0.0
     },
     {
       "feature": "Admission_grade",
-      "importance_mean": -0.00012069164168655444,
-      "importance_std": 0.004321901127335267
+      "importance_mean": 0.0,
+      "importance_std": 0.0
     },
     {
-      "feature": "Application_mode",
-      "importance_mean": -0.0012323139191499632,
-      "importance_std": 0.004197463052353635
+      "feature": "Application_order",
+      "importance_mean": 0.0,
+      "importance_std": 0.0
     },
     {
-      "feature": "Scholarship_holder",
-      "importance_mean": -0.002982112764676048,
-      "importance_std": 0.0030581147709814955
+      "feature": "Previous_qualification_grade",
+      "importance_mean": -0.0001431034186706648,
+      "importance_std": 0.0009700302389600116
+    },
+    {
+      "feature": "Curricular_units_1st_sem_grade",
+      "importance_mean": -0.0007233814295515729,
+      "importance_std": 0.0009323053551849941
+    },
+    {
+      "feature": "Marital_status",
+      "importance_mean": -0.000811811790917194,
+      "importance_std": 0.0026199479195660033
+    },
+    {
+      "feature": "Previous_qualification",
+      "importance_mean": -0.0009716048911859842,
+      "importance_std": 0.0018744495421437577
+    },
+    {
+      "feature": "Displaced",
+      "importance_mean": -0.0026273721983670396,
+      "importance_std": 0.0024274878528701234
     }
   ],
   "sample_defaults": {
@@ -267,7 +253,7 @@
     "Daytime_evening_attendance": "1",
     "Previous_qualification": "1",
     "Previous_qualification_grade": 133.1,
-    "Admission_grade": 126.1,
+    "Admission_grade": 126.5,
     "Displaced": "1",
     "Debtor": "0",
     "Tuition_fees_up_to_date": "1",
@@ -276,10 +262,10 @@
     "Age_at_enrollment": 20.0,
     "Curricular_units_1st_sem_enrolled": 6.0,
     "Curricular_units_1st_sem_approved": 5.0,
-    "Curricular_units_1st_sem_grade": 12.285714285714286,
+    "Curricular_units_1st_sem_grade": 12.34142857142857,
     "Curricular_units_2nd_sem_enrolled": 6.0,
     "Curricular_units_2nd_sem_approved": 5.0,
-    "Curricular_units_2nd_sem_grade": 12.2,
+    "Curricular_units_2nd_sem_grade": 12.333333333333334,
     "Unemployment_rate": 11.1,
     "Inflation_rate": 1.4,
     "GDP": 0.32
