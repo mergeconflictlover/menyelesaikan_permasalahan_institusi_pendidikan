@@ -59,20 +59,6 @@ Jika aplikasi berhasil berjalan, buka URL lokal yang ditampilkan Streamlit, bias
 http://localhost:8501
 ```
 
-### Link Prototype Streamlit Community Cloud
-Prototype juga telah di-deploy ke Streamlit Community Cloud dan dapat diakses melalui:
-
-- `https://studentstatuspredictor.streamlit.app/`
-
-Repository GitHub untuk deployment:
-
-- `https://github.com/mergeconflictlover/menyelesaikan_permasalahan_institusi_pendidikan`
-
-Dokumentasi visual prototype yang disertakan pada folder submission:
-
-- Screenshot Streamlit lokal: `localhost:8501.png`
-- Screenshot Streamlit Community Cloud: `studentstatuspredictor.streamlit.app.png`
-
 ## Business Dashboard
 Dashboard bisnis utama untuk submission ini menggunakan `Metabase`, mengikuti pendekatan yang sama seperti submission sebelumnya. Dashboard ini difokuskan untuk membantu institusi memonitor indikator yang paling berkaitan dengan risiko dropout, seperti status pembayaran biaya kuliah, jumlah mata kuliah yang lulus pada semester pertama dan kedua, distribusi status siswa, serta perbedaan performa antar program studi.
 
@@ -138,11 +124,24 @@ Langkah menjalankan aplikasi:
 streamlit run app.py
 ```
 
+Prototype juga telah di-deploy ke Streamlit Community Cloud dan dapat diakses melalui:
+
+- `https://studentstatuspredictor.streamlit.app/`
+
+Repository GitHub untuk deployment:
+
+- `https://github.com/mergeconflictlover/menyelesaikan_permasalahan_institusi_pendidikan`
+
 Struktur artefak utama yang digunakan aplikasi:
 - `app.py`
 - `model_utils.py`
 - `model/student_status_pipeline.joblib`
 - `model/metrics_summary.json`
+
+Dokumentasi visual prototype yang disertakan pada folder submission:
+
+- Screenshot Streamlit lokal: `localhost:8501.png`
+- Screenshot Streamlit Community Cloud: `studentstatuspredictor.streamlit.app.png`
 
 Dokumentasi video submission yang disertakan pada folder submission:
 
@@ -162,8 +161,8 @@ Beberapa temuan utama dari analisis dan model:
 - Analisis lanjutan pada notebook juga menyiapkan evaluasi kelompok, sehingga model tidak hanya dilihat dari performa umum tetapi juga dari perilaku prediksi pada subset tertentu seperti gender dan kelompok usia.
 
 ### Rekomendasi Action Items
-- Buat sistem peringatan dini untuk siswa yang jumlah mata kuliah lulus pada semester kedua berada di bawah ambang minimum.
-- Prioritaskan pendampingan akademik bagi siswa yang pada semester pertama dan kedua memiliki jumlah mata kuliah disetujui rendah.
-- Integrasikan unit akademik dan keuangan agar siswa dengan status pembayaran tidak mutakhir segera masuk daftar monitoring.
-- Lakukan intervensi khusus pada program studi yang historisnya memiliki proporsi `dropout` lebih tinggi.
-- Fokuskan program retensi pada siswa usia masuk lebih tinggi atau siswa dengan pola transisi yang masih berada pada status `Enrolled`.
+- Bangun sistem peringatan dini yang menandai siswa dengan `Curricular_units_2nd_sem_approved <= 2` sebagai prioritas intervensi akademik level satu. Rata-rata siswa `Dropout` hanya menyelesaikan `1,94` mata kuliah pada semester kedua, jauh di bawah kelompok `Graduate` yang berada di `6,18`.
+- Prioritaskan intervensi gabungan akademik dan finansial untuk siswa dengan `Tuition_fees_up_to_date = 0`. Berdasarkan dashboard, kelompok dengan pembayaran tidak mutakhir memiliki `457` kasus dropout dari `528` siswa atau sekitar `86,6%`, sehingga kelompok ini harus masuk daftar monitoring harian bagian akademik dan keuangan.
+- Fokuskan program retensi untuk siswa usia masuk `25 tahun ke atas`. Analisis dashboard menunjukkan dropout rate kelompok usia `25-29` mencapai `57,6%` dan kelompok `30+` mencapai `54,1%`, sehingga format intervensi yang lebih fleksibel seperti mentoring singkat, kelas malam, atau konsultasi daring perlu diprioritaskan pada segmen ini.
+- Susun daftar prioritas program studi berdasarkan `dropout count` dan `dropout rate`, lalu lakukan evaluasi kurikulum dan beban studi pada program dengan beban dropout tertinggi. Intervensi ini lebih terarah dibanding pendekatan umum karena berbasis segmentasi risiko per program studi.
+- Perlakukan status `Enrolled` sebagai kelompok transisi yang perlu evaluasi berkala, bukan sebagai kelompok aman. Model menunjukkan kelas ini paling sulit diprediksi, sehingga siswa yang masih `Enrolled` tetapi memiliki performa semester awal rendah perlu ditinjau ulang setiap akhir semester menggunakan dashboard dan prototype machine learning.
