@@ -135,7 +135,7 @@ def load_metrics():
 @st.cache_data
 def load_data():
     df = pd.read_csv(DATA_PATH, sep=";", encoding="utf-8-sig")
-    df = df.rename(columns={"Status": "Target"})
+    df = df.rename(columns={"Status": "Target"}).copy()
     df = df[df["Target"].isin(["Dropout", "Graduate"])].copy()
     df["Course_name"] = df["Course"].map(COURSE_MAP)
     df["Gender_label"] = df["Gender"].map(GENDER_MAP)

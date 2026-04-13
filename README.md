@@ -10,7 +10,7 @@ Jaya Jaya Institut merupakan institusi pendidikan tinggi yang menghadapi masalah
 
 ### Cakupan Proyek
 - Melakukan analisis data siswa dari tahap business understanding sampai evaluation.
-- Memfokuskan analisis pada siswa dengan status akhir `Dropout` dan `Graduate`, sedangkan siswa `Enrolled` dikeluarkan dari dashboard dan pemodelan agar sesuai dengan tujuan deteksi dini risiko dropout.
+- Menggunakan dataset final submission yang hanya berisi siswa dengan status akhir `Dropout` dan `Graduate` agar dashboard serta pemodelan benar-benar selaras dengan tujuan deteksi dini risiko dropout.
 - Membangun model machine learning biner untuk memprediksi status akhir siswa: `Dropout` atau `Graduate`.
 - Menyimpan model terbaik agar siap dipakai ulang pada prototype Streamlit.
 - Menyusun dokumentasi proyek, kesimpulan, dan action items yang relevan untuk institusi pendidikan.
@@ -18,45 +18,42 @@ Jaya Jaya Institut merupakan institusi pendidikan tinggi yang menghadapi masalah
 
 ### Persiapan
 Sumber data:
-- Dataset utama yang digunakan dalam submission: `data/data.csv`
+- Dataset mentah lokal untuk proses pembersihan data: `data/data_raw_original.csv`
+- Dataset final yang digunakan pada analisis, dashboard, dan pemodelan: `data/data.csv`
 - Sumber asli dataset dari repository Dicoding: `https://github.com/dicodingacademy/dicoding_dataset/tree/main/students_performance`
 - File dataset asli dari repository Dicoding: `https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv`
 - Dokumentasi dataset lokal hasil salinan referensi: `students_performance/README.md`
 
-### Setup Environment
+Alur penggunaan data pada project ini:
+- `data/data_raw_original.csv` digunakan sebagai data mentah sumber.
+- Notebook memuat data mentah tersebut, lalu memfilter siswa berstatus `Dropout` dan `Graduate`.
+- Hasil pembersihan disimpan ulang menjadi `data/data.csv`.
+- File `data/data.csv` inilah yang dipakai secara konsisten oleh notebook, dashboard, dan aplikasi `Streamlit`.
+
+#### Setup Environment
 
 Instalasi package via `requirements.txt`
 ```bash
 pip install -r requirements.txt
 ```
 
-#### Anaconda
+##### Anaconda
 ```bash
 conda create --name main-ds python=3.12
 conda activate main-ds
 pip install -r requirements.txt
 ```
 
-#### Shell/Terminal
+##### Shell/Terminal
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Menjalankan Notebook
+#### Menjalankan Notebook
 ```bash
 jupyter notebook notebook.ipynb
-```
-
-### Menjalankan Prototype Sistem Machine Learning
-```bash
-streamlit run app.py
-```
-
-Jika aplikasi berhasil berjalan, buka URL lokal yang ditampilkan Streamlit, biasanya:
-```text
-http://localhost:8501
 ```
 
 ## Business Dashboard
@@ -70,6 +67,10 @@ Metrik yang paling penting untuk dimonitor adalah:
 - distribusi risiko berdasarkan program studi dan kelompok usia.
 
 Dashboard Metabase dirancang sebagai dashboard monitoring ringkas yang langsung menampilkan indikator utama terkait risiko dropout, performa akademik, status pembayaran biaya kuliah, kelompok usia, dan program studi yang perlu diprioritaskan untuk intervensi. Setiap visualisasi pada dashboard digunakan untuk tujuan berikut:
+- `Total Students KPI` menampilkan jumlah total siswa pada dataset final biner yang menjadi cakupan dashboard.
+- `Dropout Rate KPI` menampilkan persentase siswa yang berakhir `Dropout` sehingga tim kampus dapat membaca tingkat risiko populasi secara cepat.
+- `Graduation Rate KPI` menampilkan persentase siswa yang berakhir `Graduate` sebagai pembanding langsung dari dropout rate.
+- `Tuition Issue Rate KPI` menampilkan proporsi siswa dengan status pembayaran biaya kuliah tidak mutakhir untuk memberi sinyal awal potensi masalah administratif.
 - `Student Status Distribution` menampilkan proporsi akhir siswa antara `Dropout` dan `Graduate` sebagai gambaran umum hasil akhir populasi yang dianalisis.
 - `Tuition Status by Student Outcome` menunjukkan hubungan antara kelancaran pembayaran biaya kuliah dan status akhir siswa untuk membantu tim akademik dan keuangan memprioritaskan intervensi gabungan.
 - `Dropout Rate by Gender` memperlihatkan apakah ada perbedaan tingkat dropout antar gender pada data biner yang digunakan.
@@ -151,7 +152,7 @@ Dokumentasi video submission yang disertakan pada folder submission:
 Proyek ini menunjukkan bahwa masalah dropout di Jaya Jaya Institut paling kuat berkaitan dengan kombinasi performa akademik awal dan kedisiplinan administrasi siswa. Fokus proyek diarahkan untuk membedakan siswa yang berakhir `Dropout` dan `Graduate`, sehingga hasil analisis dan model dapat langsung dipakai sebagai dasar intervensi retensi yang lebih praktis.
 
 Beberapa temuan utama dari analisis dan model:
-- Dataset awal berisi `4.424` siswa tanpa missing value dan tanpa data duplikat, lalu difilter menjadi `3.630` siswa dengan status akhir `Dropout` dan `Graduate` agar analisis sesuai dengan tujuan proyek.
+- Dataset sumber asli dari Dicoding berisi `4.424` siswa tanpa missing value dan tanpa data duplikat. Untuk submission ini digunakan dataset final berisi `3.630` siswa dengan status akhir `Dropout` dan `Graduate`, sehingga seluruh analisis, dashboard, dan pemodelan konsisten pada cakupan proyek yang sama.
 - Distribusi target pada data final terdiri dari `Graduate` sebanyak `2.209` siswa dan `Dropout` sebanyak `1.421` siswa.
 - Model terbaik adalah `Logistic Regression` dengan `accuracy 0,9160` dan `weighted f1-score 0,9150`.
 - Faktor paling berpengaruh terhadap prediksi status siswa adalah `Curricular_units_2nd_sem_approved`, `Curricular_units_1st_sem_approved`, `Curricular_units_2nd_sem_enrolled`, `Tuition_fees_up_to_date`, dan `Curricular_units_1st_sem_enrolled`.
