@@ -4,9 +4,9 @@
 Jaya Jaya Institut merupakan institusi pendidikan tinggi yang menghadapi masalah tingkat `dropout` siswa yang masih tinggi. Kondisi ini berisiko menurunkan angka kelulusan, mengganggu efektivitas program akademik, dan membuat intervensi dari pihak kampus sering terlambat dilakukan. Karena itu, proyek ini difokuskan untuk membantu institusi mendeteksi status siswa sedini mungkin berdasarkan data pendaftaran, kondisi administratif, dan performa akademik semester awal.
 
 ### Permasalahan Bisnis
-- Jaya Jaya Institut belum memiliki mekanisme yang terstruktur untuk mengidentifikasi siswa yang cenderung berakhir `Dropout` dibanding `Graduate` berdasarkan data akademik dan administratif semester awal.
-- Institusi belum memiliki dashboard monitoring yang secara spesifik menyoroti faktor-faktor yang membedakan kelompok `Dropout` dan `Graduate`, sehingga prioritas intervensi sering terlambat atau terlalu umum.
-- Institusi belum memiliki prototype machine learning yang siap digunakan untuk membantu staf akademik memperkirakan apakah profil seorang siswa lebih dekat ke pola `Dropout` atau `Graduate`.
+- Tingginya proporsi siswa yang berakhir `Dropout` berisiko menurunkan angka kelulusan serta membuat intervensi retensi menjadi terlambat dan kurang tepat sasaran.
+- Institusi masih kesulitan mengenali faktor akademik dan administratif yang paling kuat membedakan siswa yang berakhir `Dropout` dan `Graduate`, sehingga prioritas penanganan belum berbasis data.
+- Institusi belum memiliki sarana monitoring dan prototipe prediksi yang dapat membantu staf akademik membaca risiko siswa lebih dini dan mengambil tindakan yang lebih terarah.
 
 ### Cakupan Proyek
 - Melakukan analisis data siswa dari tahap business understanding sampai evaluation.
@@ -57,7 +57,7 @@ jupyter notebook notebook.ipynb
 ```
 
 ## Business Dashboard
-Dashboard bisnis utama untuk submission ini menggunakan `Metabase`, dengan sumber data yang telah difilter agar hanya mencakup siswa berstatus `Dropout` dan `Graduate`. Dashboard ini difokuskan untuk membantu institusi memonitor indikator yang paling berkaitan dengan risiko dropout, seperti status pembayaran biaya kuliah, jumlah mata kuliah yang lulus pada semester pertama dan kedua, serta perbedaan performa antar program studi.
+Dashboard bisnis utama untuk submission ini menggunakan `Metabase`, dengan sumber data yang telah difilter agar hanya mencakup siswa berstatus `Dropout` dan `Graduate`. Dashboard ini dirancang untuk menjawab kebutuhan institusi dalam memonitor risiko dropout secara cepat, mengenali kelompok siswa yang paling rentan, dan melihat faktor akademik maupun administratif yang paling relevan untuk intervensi.
 
 Metrik yang paling penting untuk dimonitor adalah:
 - proporsi siswa `Dropout` dan `Graduate`;
@@ -112,6 +112,8 @@ Catatan penting:
 Dokumentasi visual dashboard yang disertakan pada folder submission:
 
 - Screenshot dashboard Metabase: `himbarbuana-dashboard.png`
+- Link dashboard Looker Studio: `https://lookerstudio.google.com/reporting/9f7d6581-ace6-4c7c-9cf4-2c47fdf44464`
+- Screenshot dashboard Looker Studio: `lookerstudio.google.com.png`
 
 ## Menjalankan Sistem Machine Learning
 Aplikasi prototype dimuat dari model terlatih pada folder `model/student_status_pipeline.joblib`. Prototype menerima input profil siswa dan performa akademik awal, lalu menampilkan:
@@ -149,7 +151,7 @@ Dokumentasi video submission yang disertakan pada folder submission:
 - Video penjelasan proyek: `himbarbuana-video.mp4`
 
 ## Conclusion
-Proyek ini menunjukkan bahwa masalah dropout di Jaya Jaya Institut paling kuat berkaitan dengan kombinasi performa akademik awal dan kedisiplinan administrasi siswa. Fokus proyek diarahkan untuk membedakan siswa yang berakhir `Dropout` dan `Graduate`, sehingga hasil analisis dan model dapat langsung dipakai sebagai dasar intervensi retensi yang lebih praktis.
+Proyek ini menunjukkan bahwa masalah dropout di Jaya Jaya Institut paling kuat berkaitan dengan kombinasi performa akademik awal dan kedisiplinan administrasi siswa. Dengan memfokuskan analisis pada perbedaan antara siswa yang berakhir `Dropout` dan `Graduate`, project ini membantu institusi menjawab tiga kebutuhan utama: mengenali faktor risiko yang paling penting, memonitor kelompok yang paling rentan melalui dashboard, dan menyediakan prototipe prediksi yang siap dipakai untuk triase awal.
 
 Beberapa temuan utama dari analisis dan model:
 - Dataset sumber asli dari Dicoding berisi `4.424` siswa tanpa missing value dan tanpa data duplikat. Untuk submission ini digunakan dataset final berisi `3.630` siswa dengan status akhir `Dropout` dan `Graduate`, sehingga seluruh analisis, dashboard, dan pemodelan konsisten pada cakupan proyek yang sama.
@@ -159,6 +161,8 @@ Beberapa temuan utama dari analisis dan model:
 - Siswa dengan jumlah mata kuliah semester kedua yang sangat rendah, pembayaran biaya kuliah yang tidak lancar, dan capaian semester pertama yang rendah cenderung lebih dekat ke status `Dropout`, sedangkan profil yang mulai mendekati rata-rata `Graduate` umumnya memiliki capaian semester kedua sekitar `6` mata kuliah approved atau lebih.
 - Evaluasi tidak hanya menggunakan accuracy, tetapi juga `precision`, `recall`, `f1-score`, `confusion matrix`, dan `feature importance`.
 - Analisis lanjutan pada notebook juga menyiapkan evaluasi kelompok, sehingga model tidak hanya dilihat dari performa umum tetapi juga dari perilaku risiko pada subset tertentu seperti gender dan kelompok usia.
+
+Secara keseluruhan, hasil analisis, dashboard, dan prototipe machine learning pada submission ini sudah menjawab cakupan proyek yang disusun pada awal dokumen. Institusi kini memiliki dasar data yang lebih kuat untuk memantau risiko dropout, memprioritaskan intervensi, dan memperkirakan profil siswa yang lebih dekat ke pola `Dropout` atau `Graduate`.
 
 ### Rekomendasi Action Items
 - Prioritas 1: Bangun sistem peringatan dini yang menandai siswa dengan `Curricular_units_2nd_sem_approved <= 2` sebagai kandidat intervensi akademik paling mendesak. Rata-rata siswa `Dropout` hanya menyelesaikan `1,94` mata kuliah pada semester kedua, jauh di bawah kelompok `Graduate` yang berada di `6,18`, sehingga ambang ini dapat dipakai sebagai trigger awal untuk mentoring wajib, kelas remedial, dan review rencana studi dalam `1-2` minggu setelah nilai semester keluar.

@@ -122,6 +122,15 @@ STATUS_COPY = {
 }
 
 
+def normalize_status_label(value):
+    text = str(value).strip()
+    if text.lower() == "dropout":
+        return "Dropout"
+    if text.lower() == "graduate":
+        return "Graduate"
+    return text
+
+
 @st.cache_resource
 def load_model():
     return joblib.load(MODEL_PATH)
@@ -746,13 +755,25 @@ with prediction_tab:
         st.dataframe(input_frame, width="stretch")
 
     if submitted:
-        prediction = model.predict(input_frame)[0]
+        prediction = normalize_status_label(model.predict(input_frame)[0])
         probabilities = model.predict_proba(input_frame)[0]
         proba_df = (
-            pd.DataFrame({"Status": model.classes_, "Probability": probabilities})
+            pd.DataFrame(
+                {
+                    "Status": [normalize_status_label(label) for label in model.classes_],
+                    "Probability": probabilities,
+                }
+            )
             .sort_values("Probability", ascending=False)
         )
-        current_status = STATUS_COPY[prediction]
+        current_status = STATUS_COPY.get(
+            prediction,
+            {
+                "label": prediction,
+                "tone": "neutral",
+                "summary": "This profile was generated successfully, but the label was not found in the predefined status copy.",
+            },
+        )
 
         result_cols = st.columns(3)
         with result_cols[0].container(border=True, height="stretch"):
@@ -777,9 +798,11 @@ with prediction_tab:
         for approved_units in [0, 2, 4, 6, 8]:
             scenario_frame = input_frame.copy()
             scenario_frame["Curricular_units_2nd_sem_approved"] = approved_units
-            scenario_prediction = model.predict(scenario_frame)[0]
+            scenario_prediction = normalize_status_label(model.predict(scenario_frame)[0])
             dropout_probability = float(
-                model.predict_proba(scenario_frame)[0][list(model.classes_).index("Dropout")]
+                model.predict_proba(scenario_frame)[0][
+                    [normalize_status_label(label) for label in model.classes_].index("Dropout")
+                ]
             )
             scenario_rows.append(
                 {
