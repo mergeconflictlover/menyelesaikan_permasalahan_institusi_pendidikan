@@ -22,7 +22,6 @@ Sumber data:
 - Dataset final yang digunakan pada analisis, dashboard, dan pemodelan: `data/data.csv`
 - Sumber asli dataset dari repository Dicoding: `https://github.com/dicodingacademy/dicoding_dataset/tree/main/students_performance`
 - File dataset asli dari repository Dicoding: `https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv`
-- Dokumentasi dataset lokal hasil salinan referensi: `students_performance/README.md`
 
 Alur penggunaan data pada project ini:
 - `data/data_raw_original.csv` digunakan sebagai data mentah sumber.
